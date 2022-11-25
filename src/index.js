@@ -19,7 +19,7 @@ loadMoreBtn.addEventListener('click', onLoadMoreBtn)
 onScroll()
 onToTopBtn()
 
- async function onSearchForm(e) {
+ function onSearchForm(e) {
   e.preventDefault()
   window.scrollTo({ top: 0 })
   page = 1
@@ -32,7 +32,7 @@ onToTopBtn()
     return
   }
 
-  const fetch = await fetchImages(query, page, perPage)
+   fetchImages(query, page, perPage)
     .then(({ data }) => {
       if (data.totalHits === 0) {
         alertNoImagesFound()
@@ -49,11 +49,11 @@ onToTopBtn()
     .catch(error => console.log(error))
 }
 
-async function onLoadMoreBtn() {
+ function onLoadMoreBtn() {
   page += 1
   simpleLightBox.destroy()
 
-  const fetch = await fetchImages(query, page, perPage)
+   fetchImages(query, page, perPage)
     .then(({ data }) => {
       renderGallery(data.hits)
       simpleLightBox = new SimpleLightbox('.gallery a').refresh()
